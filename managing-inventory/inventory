@@ -7,7 +7,7 @@ managed1
 managed2
 
 [WebServers]  
-managed2[1:2] 
+managed[1:2] 
   
 [Testing]  
 managed1 
