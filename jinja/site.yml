@@ -1,4 +1,4 @@
-- name: Installand start apache2
+- name: Install and start apache2
   hosts: webservers
   become: true
 
@@ -11,7 +11,12 @@
         force_apt_get: yes
 
     - name: restart apache2
-      service: name= apache2 state=restarted enabled=yes
+      service:
+        name: apache2
+        state: restarted
+        enabled: yes
 
     - name: copy index.html
-      template: src=<pod1>.html.j2 dest=/var/www/html/pod1.html
+      template:
+        src: pod1.html.j2
+        dest: /var/www/html/pod1.html
