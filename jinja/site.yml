@@ -1,0 +1,17 @@
+- name: Installand start apache2
+  hosts: webservers
+  become: true
+
+  tasks: 
+    - name: apache2 is present
+      apt: 
+        name: apache2
+        state: present
+        update_cache: yes
+        force_apt_get: yes
+
+    - name: restart apache2
+      service: name= apache2 state=restarted enabled=yes
+
+    - name: copy index.html
+      template: src=<pod1>.html.j2 dest=/var/www/html/pod1.html
