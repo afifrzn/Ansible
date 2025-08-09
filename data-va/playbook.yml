@@ -1,0 +1,40 @@
+- name: Install and Ensure the apache2 service
+  hosts: webserver
+  become: true
+  vars:
+    web_pkg: apache2
+    web_service: apache2
+    python_pkg: python3-urlib
+
+    tasks:
+      - name: required packages are installed and up to date
+        apt:
+          update_cache: yes
+          force_apt_get: yes
+          name:
+            - "{{web_pkg0}}"
+            - "{{python_pkg}}"
+          state: latest
+
+      - name: The {{web_service}} service is enabled
+        service: 
+            name: "{{web_service}}"
+            enabled: true
+            state: started
+
+      - name: Web content is in place
+        copy: 
+          content: "Hello Ansible"
+          dest: /var/www/html/index.html
+
+      - name: Verifying the webserver
+        uri:
+          url: http://managed2
+          status_code: 200
+          return_content: yes
+        register: Result
+
+      - name: Print output server
+        debug:
+          var: Result.content
+
