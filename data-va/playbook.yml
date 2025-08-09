@@ -6,7 +6,7 @@
     web_service: apache2
     python_pkg: python3-urlib
 
-    tasks:
+  tasks:
       - name: required packages are installed and up to date
         apt:
           update_cache: yes
