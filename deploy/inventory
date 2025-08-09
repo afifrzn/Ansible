@@ -1,3 +1,3 @@
 [servers]
-managed1
-managed2
+managed1 ansible_user=pod1
+managed2 ansible_user=pod2
